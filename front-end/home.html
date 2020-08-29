@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HOME</title>
+	<script>
+		window.setTimeout("waktu()", 1000);
+	 
+		function waktu() {
+			var waktu = new Date();
+			setTimeout("waktu()", 1000);
+			document.getElementById("jam").innerHTML = waktu.getHours();
+			document.getElementById("menit").innerHTML = waktu.getMinutes();
+			document.getElementById("detik").innerHTML = waktu.getSeconds();
+		};
+	</script>
+
+	<style>
+		h1,h2,p,a{
+			font-family: sans-serif;
+			font-weight: normal;
+		}
+	 
+		.jam-digital {
+			overflow: hidden;
+			width: 330px;
+			margin: 20px auto;
+			border: 5px solid #efefef;
+		}
+		.kotak{
+			float: left;
+			width: 110px;
+			height: 100px;
+			background-color: #189fff;
+		}
+		.jam-digital p {
+			color: #fff;
+			font-size: 36px;
+			text-align: center;
+			margin-top: 30px;
+		}
+	 
+	 	#wrap{
+	 		float: clearfix;
+	 		text-align: center;
+	 	}
+	</style>
+</head>
+<body>
+<div class="jam-digital">
+	<div class="kotak">
+		<p id="jam"></p>
+	</div>
+	<div class="kotak">
+		<p id="menit"></p>
+	</div>
+	<div class="kotak">
+		<p id="detik"></p>
+	</div>
+</div>
+
+<div id="wrap">
+	<div id="message">
+		<h2>Hello user</h2>
+	</div>
+
+	<div id="btn-hello">
+		<button id="hello">Hello</button>
+	</div>
+
+	<div id="form">
+		<div class="username">
+			<label>Username</label>
+			<div><input type="text" name="txtusername"/></div>
+		</div>
+		<div class="password">
+			<label>Password</label>
+			<div><input type="password" name="txtpassword"/></div>
+		</div>
+		<div class="btn-login">
+			<button id="login">Login</button>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	document.getElementById("login").addEventListener("click", function() {
+		let kirim = {
+		    	username: document.getElementById("txtusername").value, 
+		    	password: document.getElementById("txtpassword").value
+		    };
+
+		(async () => {
+		  const rawResponse = await fetch('http://localhost/Eri-fb92163745789d2a0e971884c5c77027/back-end/login.php', {
+		    method: 'POST',
+		    headers: {
+		      'Accept': 'application/json',
+		      'Content-Type': 'application/json'
+		    },
+		    body: JSON.stringify(kirim)
+		  });
+		  const content = await rawResponse.json();
+
+		  console.log(content);
+		})();
+	});
+</script>
+</body>
+</html>
