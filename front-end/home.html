@@ -70,11 +70,11 @@
 	<div id="form">
 		<div class="username">
 			<label>Username</label>
-			<div><input type="text" name="txtusername"/></div>
+			<div><input type="text" name="txtusername" id="txtusername" /></div>
 		</div>
 		<div class="password">
 			<label>Password</label>
-			<div><input type="password" name="txtpassword"/></div>
+			<div><input type="password" name="txtpassword" id="txtpassword" /></div>
 		</div>
 		<div class="btn-login">
 			<button id="login">Login</button>
@@ -83,11 +83,7 @@
 </div>
 
 <script type="text/javascript">
-	document.getElementById("login").addEventListener("click", function() {
-		let kirim = {
-		    	username: document.getElementById("txtusername").value, 
-		    	password: document.getElementById("txtpassword").value
-		    };
+	function login(username, password){	
 
 		(async () => {
 		  const rawResponse = await fetch('http://localhost/Eri-fb92163745789d2a0e971884c5c77027/back-end/login.php', {
@@ -96,12 +92,19 @@
 		      'Accept': 'application/json',
 		      'Content-Type': 'application/json'
 		    },
-		    body: JSON.stringify(kirim)
+		    body: JSON.stringify({
+		    	user: username,
+		    	pass: password
+		    })
 		  });
 		  const content = await rawResponse.json();
 
 		  console.log(content);
 		})();
+	};
+
+	document.getElementById("login").addEventListener("click", function(){ 
+		login(document.getElementById("txtusername").value, document.getElementById("txtpassword").value); 
 	});
 </script>
 </body>

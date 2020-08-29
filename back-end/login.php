@@ -7,7 +7,8 @@ require "Koneksi.php";
 // $kon = (new Koneksi())->getMac();
 // $kon = (new Koneksi())->getBrowser();
 
+$post = json_decode(file_get_contents('php://input'));
 echo "<pre>";
-print_r(file_get_contents('php://input'));
+print_r($post);
 exit;
 ?>
